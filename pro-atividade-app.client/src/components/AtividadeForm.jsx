@@ -20,6 +20,14 @@ export default function AtividadeForm(props) {
         setAtividade = ({...atividade, [name]: value})
     }
 
+    const handleCancelar = (e) => {
+        e.preventDefault();
+
+        // cancelarAtividade();
+
+        setAtividade(atividadeInicial);
+    }
+
     function atividadeAtual(){
         if (props.ativSelecionada.id != 0) {
             return props.ativSelecionada
@@ -30,6 +38,8 @@ export default function AtividadeForm(props) {
     }
 
     return (
+        <>
+            <h2>Atividade {atividade.id != 0 ? atividade.id : ''}</h2>
         <form className="row g-3">
             <div className="col-md-6">
                 <label className="form-label">Título</label>
@@ -67,8 +77,27 @@ export default function AtividadeForm(props) {
             </div>
             <hr />
             <div className="col-12">
-                <button className="btn btn-outline-secondary" onClick={props.addAtividades}>+ Atividade</button>
+                {
+                    atividade.id == 0 ?
+                    <button className="btn btn-outline-secondary"
+                        onClick={props.addAtividades}>
+                        <i className="fas fa-plus me-2"></i>
+                            Atividade</button>
+                        :
+                        <>
+                            <button className="btn btn-outline-success me-2" type="submit">
+                                <i className="fas fa-plus me-2"></i>
+                                Salvar
+                            </button>
+                            <button className="btn btn-outline-danger"
+                                onClick={handleCancelar}>
+                                <i className="fas fa-plus me-2"></i>
+                                Cancelar
+                            </button>
+                        </>
+                }
             </div>
         </form>
+        </>
     )
 }
