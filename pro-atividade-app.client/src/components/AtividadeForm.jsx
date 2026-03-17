@@ -1,11 +1,32 @@
 import { useState, useEffect } from 'react'
 
+const atividadeInicial = {
+    id: 0,
+    titulo: '',
+    prioridade: 0,
+    descricao: ''
+}
+
 export default function AtividadeForm(props) {
-    const [atividade, setAtividade] = useState({})
+    const [atividade, setAtividade] = useState((atividadeAtual))
+
+    useEffect(() => {
+        if (props.ativSelecionada.id != 0)
+            setAtividade(props.ativSelecionada)
+    }, [props.ativSelecionada]);
 
     const inputTextHandler = (e) => {
         const { name, value } = e.target;
         setAtividade = ({...atividade, [name]: value})
+    }
+
+    function atividadeAtual(){
+        if (props.ativSelecionada.id != 0) {
+            return props.ativSelecionada
+        }
+        else {
+            return atividadeInicial;
+        }
     }
 
     return (
