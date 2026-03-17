@@ -1,40 +1,32 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import AtividadeForm from './components/AtividadeForm';
 import Atividade from './components/Atividade';
 import AtividadeLista from './components/AtividadeLista';
 
- let inicialState = [
-    {
-        id: 1,
-        prioridade: '1',
-        titulo: "Título",
-        descricao: "Primeira Atividade",
-    },
-    {
-        id: 2,
-        prioridade: '1',
-        titulo: "Título",
-        descricao: "Segunda Atividade",
-    },
-];
-
 function App() {
-    const [atividades, setAtividades] = useState(inicialState);
-    const [atividade, setAtividade] = useState({});
+    const [index, setIndex] = useState(0);
+    const [atividades, setAtividades] = useState([]);
+    const [atividade, setAtividade] = useState({id: 0});
 
-    function addAtividades(e)
+    useEffect(() => {
+        atividades.length <= 0 ? setIndex(1) :
+        setIndex(Math.max.apply(Math, atividades.map((item) => item.id)) + 1)
+    }, [atividades])
+
+    function addAtividades(ativ)
     {
-        e.preventDefault();
+        setAtividades([...atividades, { ...ativ, id: index }]);
+    }
 
-        const atividade = {
-            id: Math.max.apply(Math, props.atividades.map((item) => item.id)) + 1,
-            prioridade: document.getElementById('prioridade').value,
-            titulo: document.getElementById('titulo').value,
-            descricao: document.getElementById('descricao').value,  
-        };
+    function cancelarAtividade() {
+        setAtividade({ id: 0 });
+    }
 
-        setAtividades([...atividades, {...atividade}])  
+    function atualizaAtividade(ativ)
+    {
+        setAtividades(atividades.map(item => item.id === ativ.id ? ativ : item));
+        setAtividade({ id: 0 });
     }
 
     function deletarAtividade(id)
@@ -54,6 +46,8 @@ function App() {
         <>
             <AtividadeForm
                 addAtividades={addAtividades}
+                cancelarAtividade={cancelarAtividade}
+                atualizaAtividade={atualizaAtividade}
                 ativSelecionada={atividade}
                 atividades={atividades}
             />
