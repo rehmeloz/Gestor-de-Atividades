@@ -22,7 +22,7 @@ namespace pro_atividade_app.Server.Controllers
         [HttpPost]
         public Atividade Post(Atividade atividade)
         {
-            atividade.id = 25;
+            atividade.Id = 25;
             return atividade;
         }
 
