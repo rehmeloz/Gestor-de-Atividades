@@ -3,15 +3,24 @@ import './App.css'
 import AtividadeForm from './components/AtividadeForm';
 import Atividade from './components/Atividade';
 import AtividadeLista from './components/AtividadeLista';
+import api from './api/atividade'
 
 function App() {
     const [index, setIndex] = useState(0);
     const [atividades, setAtividades] = useState([]);
-    const [atividade, setAtividade] = useState({id: 0});
+    const [atividade, setAtividade] = useState({ id: 0 });
+
+    const pegaTodasAtividades = () => {
+        const response = api.get('atividade');
+        return response.data;
+    }
 
     useEffect(() => {
-        atividades.length <= 0 ? setIndex(1) :
-        setIndex(Math.max.apply(Math, atividades.map((item) => item.id)) + 1)
+        const getAtividades = () => {
+            const todasAtividades = pegaTodasAtividades();
+            if (todasAtividades) setAtividades(pegaTodasAtividades);
+        }
+        getAtividades();
     }, [atividades])
 
     function addAtividades(ativ)
