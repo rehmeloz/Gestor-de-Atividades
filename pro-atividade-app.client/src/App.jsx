@@ -32,16 +32,21 @@ function App() {
         setAtividade({ id: 0 });
     }
 
-    function atualizaAtividade(ativ)
+    const atualizaAtividade = async (ativ) =>
     {
-        setAtividades(atividades.map(item => item.id === ativ.id ? ativ : item));
+        const response = await api.put(`atividade/${ativ.id}`, ativ);
+        const { id } = response.data;
+        setAtividades(atividades.map(item => item.id === id ? response.data : item));
         setAtividade({ id: 0 });
     }
 
-    function deletarAtividade(id)
+    const deletarAtividade = async (id) =>
     {
-        const atividadesFiltradas = atividades.filter(atividade => atividade.id != id);
-        setAtividades([...atividadesFiltradas]);
+        if (await api.delete(`atividade/${id}`))
+        {
+            const atividadesFiltradas = atividades.filter(atividade => atividade.id != id);
+            setAtividades([...atividadesFiltradas]);
+        }
     }
 
     function pegarAtividade(id) {
