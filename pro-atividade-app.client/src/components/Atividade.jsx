@@ -4,36 +4,37 @@ export default function Atividade(props)
 {
     function prioridadeLabel(param) {
         switch (param) {
-            case '1': return 'Baixa';
-            case '2': return 'Média';
-            case '3': return 'Alta';
-            default: return 'Não definido';
+            case 'Baixa':
+            case 'Normal':
+            case 'Alta':
+                return param
+            default: return 'NÃ£o definido';
         }
     }
 
     function prioridadeStyle(param) {
         switch (param) {
-            case '1': return 'smile';
-            case '2': return 'meh';
-            case '3': return 'frown';
-            default: return 'Não definido';
+            case 'Baixa': return 'smile';
+            case 'Normal': return 'meh';
+            case 'Alta': return 'frown';
+            default: return 'NÃ£o definido';
         }
     }
 
     function prioridadeBorder(param) {
         switch (param) {
-            case '1': return 'border-success';
-            case '2': return 'border-warning';
-            case '3': return 'border-danger';
+            case 'Baixa': return 'border-success';
+            case 'Normal': return 'border-warning';
+            case 'Alta': return 'border-danger';
             default: return 'border-secondary';
         }
     }
 
     function prioridadeTextStyle(param) {
         switch (param) {
-            case '1': return 'text-success';
-            case '2': return 'text-warning';
-            case '3': return 'text-danger';
+            case 'Baixa': return 'text-success';
+            case 'Normal': return 'text-warning';
+            case 'Alta': return 'text-danger';
             default: return 'text-secondary';
         }
     }

@@ -32,7 +32,7 @@ export default function AtividadeForm(props) {
         if (props.ativSelecionada.id !== 0)
             props.atualizaAtividade(atividade);
         else
-            props.addAtividades(atividade); // ✅ CORRIGIDO - com S
+            props.addAtividades(atividade);
 
         setAtividade(atividadeInicial);
     }
@@ -68,10 +68,10 @@ export default function AtividadeForm(props) {
                         value={atividade.prioridade}
                         onChange={inputTextHandler}
                         className="form-select">
-                        <option value="0">Selecione...</option>
-                        <option value="1">Baixa</option>
-                        <option value="2">Normal</option>
-                        <option value="3">Alta</option>
+                        <option value="NaoDefinido">Selecione...</option>
+                        <option value="Baixa">Baixa</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Alta">Alta</option>
                     </select>
                 </div>
                 <div className="col-md-12">
