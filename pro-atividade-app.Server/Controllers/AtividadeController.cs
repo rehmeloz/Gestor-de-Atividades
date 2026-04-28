@@ -28,11 +28,11 @@ namespace pro_atividade_app.Server.Controllers
         }
 
         [HttpPost]
-        public IEnumerable<Atividade> Post(Atividade atividade)
+        public Atividade Post(Atividade atividade)
         {
             _context.Atividades.Add(atividade);
             if (_context.SaveChanges() > 0)
-                return _context.Atividades;
+                return atividade;
             else
                 throw new Exception("Não foi possível adicionar uma nova atividade");
         }

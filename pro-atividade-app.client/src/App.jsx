@@ -6,7 +6,6 @@ import AtividadeLista from './components/AtividadeLista';
 import api from './api/atividade'
 
 function App() {
-    const [index, setIndex] = useState(0);
     const [atividades, setAtividades] = useState([]);
     const [atividade, setAtividade] = useState({ id: 0 });
 
@@ -23,9 +22,10 @@ function App() {
         getAtividades();
     }, [])
 
-    function addAtividades(ativ)
-    {
-        setAtividades([...atividades, { ...ativ, id: index }]);
+    const addAtividades = async (ativ) => 
+    { 
+        const response = await api.post('atividade', ativ);
+        setAtividades([...atividades, response.data]);
     }
 
     function cancelarAtividade() {
